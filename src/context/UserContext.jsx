@@ -1,11 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     
     const [users, setUsers] = useState([]);
-
     const [dataUser, setDataUser] = useState ({
         userId:'',
         name: '',
@@ -13,6 +12,18 @@ const UserProvider = ({ children }) => {
         email: '',
         date: '',
     });
+
+    useEffect(() => {
+        const getData = () => {
+        const usersLS = JSON.parse(localStorage.getItem('users')) ?? [];
+        setUsers(usersLS)
+        }
+        getData();
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('users', JSON.stringify( users ));
+    }, [users])
 
     const onChangeDataUser = ({
         userId,

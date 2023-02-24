@@ -10,8 +10,11 @@ const User = (user) => {
     }
 
      const deleteuser = () => {
-        const userDeleted = users.filter(userSelected => userSelected.userId !== userId)
-        onChangeUsers(userDeleted)
+        const respuesta = confirm('Eliminar este Ususario?');
+        if(respuesta){
+            const userDeleted = users.filter(userSelected => userSelected.userId !== userId)
+            onChangeUsers(userDeleted)
+        }
     }
   return (
     <div className="mx-5 my-10 bg-white shadow-md px-5 py-10 rounded-xl">
